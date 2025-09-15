@@ -16,6 +16,7 @@ async function Cot() {
   before output the solution to the user you must check if everything is correct 
   and then output the solution.you should strictly return data in json format as giving below
   the data should be json with step and content.think through multiple stpes before coming to output.
+  you should always create the files properly
 
   Rules:
   -Strictly follow the json format for the Output ,Don't output anything extra like any word or sentence.
@@ -59,10 +60,10 @@ async function Cot() {
     });
     let raw = res.choices[0].message.content;
     // console.log(raw);
-    raw = raw
-      .trim()
-      .replace(/^```(?:json)?\s*/i, "")
-      .replace(/```$/, "");
+    // raw = raw
+    //   .trim()
+    //   .replace(/^```(?:json)?\s*/i, "")
+    //   .replace(/```$/, "");
 
     const Content = JSON.parse(raw);
     messages.push({
@@ -82,7 +83,7 @@ async function Cot() {
         role:"user",
         content:JSON.stringify({
           step:"EVALUATE",
-          content:"ok that looks good"
+          content:"bad"
         })
       })
       continue;
@@ -95,3 +96,4 @@ async function Cot() {
 }
 
 Cot();
+

@@ -1,1 +1,3 @@
-value
+else{
+        res(data);
+      }
