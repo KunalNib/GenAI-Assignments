@@ -2,6 +2,19 @@ import "dotenv/config";
 import { OpenAI } from "openai";
 import {exec} from "child_process";
 import axios from "axios"
+import readline from "readline";
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
+
+let input="";
+rl.question("What do you want to do ?  ", (userinput) => {
+  input=userinput;
+  rl.close();
+  Agent(input);
+});
 
 const client = new OpenAI({
   apiKey: process.env.GEMINI_API_KEY,
@@ -54,7 +67,7 @@ const TOOL_MAP={
     executeCommand:executeCommand,
 }
 
-async function Agent() {
+async function Agent(input="") {
   //these calls are stateless
   //Chain of  Thought
   const system_prompt = `
@@ -67,9 +80,8 @@ async function Agent() {
   the data should be json with step and content.think through multiple stpes before coming to output.
   if the Think step is about calling the TOOL call the Tool and use the response from observe step for thinking and output
   Don't return anything in OBSERVE stage that's only for you to get the data only return for other steps
-  When user asks to make a project, use executeCommand to create directories and files instead of just printing code.
-  you are executing commands using exec in node child_process please give commands befitting to that and commands must be 
-  linux/unix based .based on your past actions you output "\n" next to lines or within don't need to add those
+  you are well versed in exectuting commands for specfic things using a tool names executeCommand which utilizes exec in child_process of node 
+  please provide proper code and don't mixup anything like symbols "\n" in the code
 
 
   Available Tools:
@@ -88,6 +100,10 @@ async function Agent() {
   - you should return json format for reasoning steps, 
   - but when user specifically asks for code or file content, 
   - return raw code inside triple backticks without wrapping in JSON
+
+  #Important
+  according to your previous uses you are adding symbols like '(\n)'  and covering the code quotes ->"" please give proper 
+  code with proper syntax and review syntax properly
 
   OUTPUT JSON Format:
   {"step":"START | THINK | TOOL | OUTPUT","content":"string" , "input":"string", "tool_name":"string"}
@@ -108,7 +124,7 @@ async function Agent() {
       role: "system",
       content: system_prompt,
     },
-    { role: "user", content: "can you do add and commit the latest updates on github"},
+    { role: "user", content: input}
   ];
 
   while (true) {
@@ -118,7 +134,7 @@ async function Agent() {
       response_format: { type: "json_object" },
     });
     let raw = res.choices[0].message.content;
-    console.log(raw);
+    // console.log(raw);
     
     // raw = raw
     //   .trim()
@@ -170,4 +186,4 @@ async function Agent() {
   }
 }
 
-Agent();
+
