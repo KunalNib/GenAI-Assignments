@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import "dotenv/config";
 import { OpenAI } from "openai";
 import {exec} from "child_process";
@@ -81,14 +82,15 @@ async function Agent(input="") {
   if the Think step is about calling the TOOL call the Tool and use the response from observe step for thinking and output
   Don't return anything in OBSERVE stage that's only for you to get the data only return for other steps
   you are well versed in exectuting commands for specfic things using a tool names executeCommand which utilizes exec in child_process of node 
-  please provide proper code and don't mixup anything like symbols "\n" in the code
+  you  are suppose to write commands in windows command prompt please use commands suitable to that.
 
 
-  Available Tools:
+  
+Available Tools:
   getWeatherDatabyCity(city: string):Returns the current weather data of the city.
   getGithubUserInfoByUsername(username:string):Returns the Github public github data of the user.
   executeCommand(command:string): Takes a linux/unix command as arg and executes the command on user's machine and returns the output
-
+  
   Rules:
   - Don't name steps anything other than START | THINK | TOOL | OBSERVE | OUTPUT don't give me anything like final
   -Strictly follow the json format for the Output ,Don't output anything extra like any word or sentence.
