@@ -4,6 +4,10 @@ import { OpenAI } from "openai";
 import {exec} from "child_process";
 import axios from "axios"
 import readline from "readline";
+import figlet from "figlet";
+
+const text=await figlet.text("K U N C O D E");
+console.log(text);
 
 const rl = readline.createInterface({
   input: process.stdin,
