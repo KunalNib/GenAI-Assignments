@@ -12,7 +12,6 @@ async function init() {
   //page by page loading pdf file
   const docs = await loader.load();
 
-  //Ready the client
   const embeddings = new GoogleGenerativeAIEmbeddings({
   model: "text-embedding-004"
   });

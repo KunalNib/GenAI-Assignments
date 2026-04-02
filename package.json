@@ -1,20 +1,32 @@
 {
-  "name": "genai-with-js",
+  "name": "genai-with",
   "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/KunalNib/GenAI-Assignments#readme",
+  "bugs": {
+    "url": "https://github.com/KunalNib/GenAI-Assignments/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KunalNib/GenAI-Assignments.git"
+  },
+  "license": "ISC",
+  "author": "",
   "type": "module",
   "main": "tempCodeRunnerFile.js",
+  "bin": {
+    "kuncode": "agents.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
-  "description": "",
   "dependencies": {
     "@google/genai": "^1.33.0",
     "@google/generative-ai": "^0.24.1",
     "@langchain/community": "^1.0.0",
-    "@langchain/core": "^1.0.1",
+    "@langchain/core": "^1.1.15",
     "@langchain/google-genai": "^1.0.3",
+    "@langchain/langgraph": "^1.0.15",
     "@langchain/openai": "^1.1.3",
     "@langchain/qdrant": "^1.0.0",
     "axios": "^1.12.0",
@@ -26,7 +38,5 @@
     "openai": "^4.104.0",
     "pdf-parse": "^1.1.1"
   },
-  "bin": {
-    "kuncode": "./agents.js"
-  }
+  "devDependencies": {}
 }
